@@ -1,0 +1,24 @@
+class Solution {
+    public int numSpecialEquivGroups(String[] A) {
+       HashSet<String> sorted = new HashSet<>();
+        for(String s: A){
+            StringBuilder odds = new StringBuilder();
+            StringBuilder evens = new StringBuilder();
+            for(int i=0;i<s.length();i++){
+                if(i%2==0){
+                    evens.append(s.charAt(i));
+                }else{
+                    odds.append(s.charAt(i));
+                }
+            }
+            char[] oddArray = odds.toString().toCharArray();
+            char[] evenArray = evens.toString().toCharArray();
+            
+            Arrays.sort(oddArray);
+            Arrays.sort(evenArray);
+            
+            sorted.add(String.valueOf(oddArray) + String.valueOf(evenArray));
+        }
+        return sorted.size();
+        }
+    }
