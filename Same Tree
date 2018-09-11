@@ -1,0 +1,20 @@
+class Solution {
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+       if(preOrder(p).equals(preOrder(q))){
+           return true;
+       }else{
+           return false;
+       }
+    }
+    public static String preOrder(TreeNode p){
+        StringBuilder sb = new StringBuilder();
+        if(p != null){
+            sb.append(p.val);
+            sb.append(preOrder(p.left));
+            sb.append(preOrder(p.right));
+        }else{
+            sb.append("null");
+        }
+        return sb.toString();
+    }
+}
