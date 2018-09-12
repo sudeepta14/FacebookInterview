@@ -1,0 +1,17 @@
+class Solution {
+    public boolean backspaceCompare(String S, String T) {
+        return stacy(S).equals(stacy(T));
+    }
+    public String stacy(String s){
+        Stack<Character> stc = new Stack();
+        for(char c: s.toCharArray()){
+            if(c!='#'){
+                stc.push(c);
+            }else if(!stc.empty()){
+                stc.pop();
+            }
+        }
+        return String.valueOf(stc);
+    }
+}
+
