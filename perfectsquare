@@ -1,0 +1,15 @@
+class Solution {
+    public boolean isPerfectSquare(int num) {
+       long Num = (long) num;
+        if(Num == 0 || Num == 1) return true;
+        long start = 0; long end = Num/2;
+        while(start <= end){
+            long mid = (start + end)/2;
+            long result = mid * mid;
+            if(result == Num) return true;
+            else if( result < Num) start = mid + 1;
+            else end = mid - 1;
+        }
+        return false;
+    }
+}
