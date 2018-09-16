@@ -1,0 +1,11 @@
+class Solution {
+    public String convertToTitle(int n) {
+        String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        n-=1;
+        if(n < 26){
+            return "" + alphabet.charAt(n);
+        }else{
+            return convertToTitle(n/26) + alphabet.charAt(n%26);
+        }
+    }
+}
