@@ -1,0 +1,32 @@
+public class ZigzagIterator {
+
+    Queue<Integer> queue = new LinkedList<>();
+    public ZigzagIterator(List<Integer> v1, List<Integer> v2) {
+        int size = 0;
+        if(v1 != null && v2 != null && v1.size() > v2.size()) {
+            size = v1.size();
+        } else if(v1 != null && v2 != null && v2.size() > v1.size()) {
+            size = v2.size();
+        } else if(v1 != null) {
+            size = v1.size();
+        } else {
+            size = v2.size();
+        }
+        for(int i=0; i<size; i++) {
+            if(v1 != null && v1.size() >= i+1) {
+                queue.offer(v1.get(i));
+            }
+            if(v2 != null && v2.size() >= i+1) {
+                queue.offer(v2.get(i));
+            }
+        }
+    }
+
+    public int next() {
+       return queue.poll();
+    }
+
+    public boolean hasNext() {
+        return !queue.isEmpty();
+    }
+}
