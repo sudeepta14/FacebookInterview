@@ -1,0 +1,27 @@
+class Solution {
+    public String customSortString(String S, String T) {
+        int [] count = new int[26];
+        // storing all the count of alphabets in the array count
+        for(char c: T.toCharArray()){
+            count[c-'a']++;
+        }
+        StringBuilder sb = new StringBuilder();
+        // checking elements in S to keep that in sorted way
+        for(char c: S.toCharArray()){
+            // Copying all the common elements and duplicate elements present in T by checking from elements in S
+            for(int i = 0; i<count[c-'a'];i++){
+                sb.append(c);
+            }
+            count[c-'a']=0;
+        }
+        // for those elements in T that is not present in S
+        for(char c='a'; c <= 'z'; c++){
+            for(int i=0; i<count[c -'a'];i++){
+                sb.append(c);
+            }
+        }
+        
+        return sb.toString();
+        
+    }  
+}
