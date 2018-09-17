@@ -1,0 +1,26 @@
+class Solution {
+    int maxDepth = -1;
+    TreeNode [] result = new TreeNode[1];
+    public TreeNode subtreeWithAllDeepest(TreeNode root) {
+     if(root == null) return root;
+        result[0]=null;
+        getNode(root, 0);
+        return result[0];
+        
+    }
+    public int getNode(TreeNode root, int depth){
+        if(root==null) return depth;
+        int l = getNode(root.left, depth+1);
+        int r = getNode(root.right, depth+1);
+        
+        if(l==r && l>= maxDepth){
+            maxDepth=l;
+            result[0]=root;
+        }
+        return Math.max(l,r);
+    }
+   
+}
+ 
+ Time Complexity: O(n)
+ Space Complexity: O(1)
