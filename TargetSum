@@ -1,0 +1,24 @@
+// Backtracking method
+
+class Solution {
+   int countWays =0;
+    public int findTargetSumWays(int[] nums, int S) {
+      countWays = 0;
+        findTarget(nums, S, 0);
+        return countWays;
+    }
+    public void findTarget(int[] nums, int S, int currIndex){
+        if(currIndex == nums.length){
+            if(S==0)
+                countWays++;
+            return;
+            
+        }
+        
+        findTarget(nums, S- nums[currIndex], currIndex+1);
+        findTarget(nums, S+ nums[currIndex], currIndex+1);
+    }
+  
+}
+
+  
