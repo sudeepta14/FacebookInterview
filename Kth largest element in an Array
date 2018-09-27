@@ -1,0 +1,58 @@
+class Solution {
+    public int findKthLargest(int[] nums, int k) {
+        Arrays.sort(nums);
+        int maxValue =0;
+        for(int i=nums.length-1;i>=0;i--){
+            int index = nums.length-k;
+            if(i == index){
+                maxValue = nums[i];
+            }
+        }
+        return maxValue;
+    }
+}
+
+Best way to do this would be doing quick sort and then if we do shuffle that even the most randomized input has a quick optimized
+solution
+class Solution {
+    public int findKthLargest(int[] nums, int k) {
+        k = nums.length - k;
+        int lo = 0;
+        int hi = nums.length -1;
+        while(lo<hi){
+            final int j = partitions(nums, lo, hi);
+            if(j<k){
+                lo = j+1;
+            }else if(hi>k){
+                hi = j-1;
+            }else{
+                break;
+            }
+        }
+        return nums[k];
+    }
+    private int partitions(int[] a, int lo, int hi){
+         int i = lo;
+        int j = hi + 1;
+        while(true) {
+            while(i < hi && less(a[++i], a[lo]));
+            while(j > lo && less(a[lo], a[--j]));
+            if(i >= j) {
+                break;
+            }
+            exch(a, i, j);
+        }
+        exch(a, lo, j);
+        return j;
+    }
+    private void exch (int []a, int i, int j){
+        int temp = a[i];
+        a[i]=a[j];
+        a[j]=temp;
+    }
+    private boolean less(int v, int x){
+        return v < x;
+    }
+}
+// Have to memorize sorting algorithms
+
