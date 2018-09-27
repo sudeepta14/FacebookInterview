@@ -1,0 +1,43 @@
+Time Complexity: O(n)
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    int maxVal = 0;
+    public int longestConsecutive(TreeNode root) {
+        longestPath(root);
+        return maxVal;
+    }
+    
+    public int[] longestPath(TreeNode root){
+        if(root == null){
+            return new int[]{0,0};
+        }
+        int incr=1,decr=1;
+        if(root.left != null){
+            int[] l = longestPath(root.left);
+            if(root.val == root.left.val +1){
+                decr = l[1]+1;
+            }else if(root.val == root.left.val-1){
+                incr = l[0]+1;
+            }
+        }
+        if(root.right != null){
+            int r[] = longestPath(root.right);
+            if(root.val == root.right.val+1){
+                decr = Math.max(decr, r[1]+1);
+            }else if(root.val == root.right.val-1){
+                incr = Math.max(incr, r[0]+1);
+            }
+        }
+        maxVal = Math.max(maxVal, incr+decr-1);
+        return new int[]{incr, decr};
+    }
+}
