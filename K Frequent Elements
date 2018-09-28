@@ -1,0 +1,17 @@
+Have to re-do this in Heap
+class Solution {
+    public List<String> topKFrequent(String[] words, int k) {
+        Map<String, Integer> map = new LinkedHashMap<>();
+        for(String word: words){
+            if(map.containsKey(word)){
+                map.put(word, map.get(word)+1);
+            }else{
+                map.put(word,1);
+            }
+        }
+        
+        List<String> candidates = new ArrayList(map.keySet());
+        Collections.sort(candidates, (w1,w2) -> map.get(w1).equals(map.get(w2)) ?w1.compareTo(w2): map.get(w2)-map.get(w1));
+        return candidates.subList(0, k);
+    }
+}
