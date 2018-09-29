@@ -1,0 +1,67 @@
+This one is meeting rooms 1-- sort the array and then find if the next start is less than the previous arrays end. 
+
+class Solution {
+    public boolean canAttendMeetings(Interval[] intervals) {
+     
+    if(intervals == null)
+        return false;
+    
+    Arrays.sort(intervals, new Comparator<Interval>(){
+        public int compare(Interval a, Interval b){
+            return a.start - b.start;
+        }
+    });
+    
+    for(int i=0; i<intervals.length -1 ;i++){
+        if (intervals[i+1].start < intervals[i].end){
+            return false;
+        }
+       
+    }
+   return true;
+    }
+}
+
+Meetings Room 2
+
+/**
+ * Definition for an interval.
+ * public class Interval {
+ *     int start;
+ *     int end;
+ *     Interval() { start = 0; end = 0; }
+ *     Interval(int s, int e) { start = s; end = e; }
+ * }
+ */
+class Solution {
+    public int minMeetingRooms(Interval[] intervals) {
+       if(intervals.length == 0)
+           return 0;
+        
+        //Adding Priority Queue like a minimum heap
+        
+        PriorityQueue<Integer> allocator = new PriorityQueue<Integer>(intervals.length, new Comparator<Integer>(){
+            public int compare(Integer a, Integer b){
+                return a-b;
+            }
+        });
+        
+        Arrays.sort(intervals, new Comparator<Interval>(){
+            public int compare(Interval a, Interval b){
+                return a.start - b.start;
+            }
+        });
+        allocator.add(intervals[0].end);
+        
+        for(int i =1; i<intervals.length;i++){
+            if(intervals[i].start >= allocator.peek()){
+                allocator.poll();
+            }
+            allocator.add(intervals[i].end);
+        }
+        return allocator.size();
+    }
+}
+
+Time Complexity = O(nlogn)
+Space Complexity = O(n)
