@@ -1,0 +1,35 @@
+// Recursive Solution === O(logn) method
+
+class Solution {
+    public int findPeakElement(int[] nums) {
+       return search(nums, 0, nums.length-1);
+    }
+    public int search(int[] nums, int l, int r){
+        if(l==r)
+            return l;
+        int mid = (l+r)/2;
+        if(nums[mid] > nums[mid+1])
+            return search(nums, l, mid);
+        return search(nums, mid+1, r);
+    }
+}
+
+// Iterative Solution
+
+class Solution {
+    public int findPeakElement(int[] nums) {
+    int l = 0, r = nums.length-1;
+        int mid = 0;
+        while(l<r){
+            mid = (l+r)/2;
+            if(nums[mid] > nums[mid+1])
+                r = mid;
+            else
+                l=mid+1;
+        }
+        return l;
+    }
+}
+
+Time Complexity : O(logn) Space Compexity : O(1)
+
