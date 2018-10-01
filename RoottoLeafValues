@@ -1,0 +1,45 @@
+This is in recursion method
+
+class Solution {
+    public int sumNumbers(TreeNode root) {
+      return sumTreeNumbers(root, 0);
+    }
+    public int sumTreeNumbers(TreeNode n, int sum){
+        if(n == null) return 0;
+        int newSum = sum * 10 + n.val;
+        if(n.left == null && n.right == null) return newSum;
+        return sumTreeNumbers(n.left, newSum )+ sumTreeNumbers(n.right, newSum);
+    }
+   
+}
+
+
+This is the iterative method by using Stack
+
+class Solution {
+    public int sumNumbers(TreeNode root) {
+        if(root == null)
+            return 0;
+        int sum = 0;
+        TreeNode curr;
+        Stack<TreeNode> st = new Stack<TreeNode>();
+        st.push(root);
+        while(!st.isEmpty()){
+            curr = st.pop();
+            if(curr.right!= null){
+                curr.right.val = curr.val*10 + curr.right.val;
+                st.push(curr.right);
+            }
+            if(curr.left!= null){
+                curr.left.val = curr.val*10 + curr.left.val;
+                st.push(curr.left);
+            }
+        
+        if(curr.left == null && curr.right == null){
+            sum += curr.val;
+        }
+        }
+        return sum;
+    }
+   
+}
