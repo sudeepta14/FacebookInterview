@@ -1,0 +1,63 @@
+class NodeNew{
+    int x;
+    int y;
+    int val;
+    
+    public NodeNew(int x, int y, int val){
+        this.x = x;
+        this.y = y;
+        this.val = val;
+    }
+}
+
+class Solution {
+    public int kthSmallest(int[][] matrix, int k) {
+       int[][] directions = {{0,1}, {1,0}};
+        int rows = matrix.length, cols = matrix[0].length, ki=0;
+        boolean[][] visited = new boolean[rows][cols];
+        PriorityQueue<NodeNew> minHeap = new PriorityQueue<>((a,b) -> (a.val - b.val));
+        minHeap.offer( new NodeNew(0,0, matrix[0][0]));
+        visited[0][0]= true;
+        
+        while(!minHeap.isEmpty()){
+            NodeNew curr = minHeap.poll();
+            ki++;
+            if(ki == k){
+                return curr.val;
+            }
+            for(int[] direction : directions){
+                int nx = curr.x + direction[0];
+                int ny = curr.y + direction[1];
+            if(nx < rows && ny<cols && !visited[nx][ny]){
+                minHeap.offer(new NodeNew(nx, ny, matrix[nx][ny]));
+                visited[nx][ny] = true;
+            }
+        }
+        }
+        throw null;
+        
+    }
+}
+
+Using Binary Search by indexing it is faster --- 
+
+class Solution {
+    public int kthSmallest(int[][] matrix, int k) {
+      
+        int lo = matrix[0][0], hi = matrix[matrix.length-1][matrix[0].length-1]+1;
+        while(lo<hi){
+            int count = 0, mid = lo + (hi-lo)/2;
+            int j = matrix[0].length -1;
+            for(int i=0; i<matrix.length;i++){
+                while(j>=0 && matrix[i][j] > mid) j--;
+                count += (j+1);
+            }
+            if(count < k) lo = mid+1;
+            else
+                hi= mid;
+        }
+        return lo;
+        
+    }
+        
+    }
