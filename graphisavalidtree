@@ -1,0 +1,38 @@
+//Union Find Algorithm
+class Solution {
+    private int find(int[] parents, int id){
+        if(parents[id] != id){
+            parents[id] = find(parents, parents[id]);
+        }
+        return parents[id];
+    }
+    private void union(int[] parents, int id1, int id2){
+        int p1= find(parents, id1);
+        int p2 = find(parents, id2);
+        if(p1 != p2){
+            parents[p2]=p1;
+        }
+    }
+    public boolean validTree(int n, int[][] edges) {
+        if(n==0){
+            return true;
+        }
+        if(edges.length != n-1){
+            return false;
+        }
+        int[] parents = new int[n];
+        for(int i=0; i<n;i++){
+            parents[i] = i;
+        }
+        
+        for(int [] e: edges){
+            int u = e[0];
+            int v = e[1];
+            if(find(parents, u) == find(parents, v)){
+                return false;
+            }
+            union(parents, u,v);
+        }
+        return true;
+    }
+}
