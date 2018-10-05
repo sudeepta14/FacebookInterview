@@ -1,0 +1,8 @@
+Select Department.name as 'Department',
+Employee.name as 'Employee',
+Salary
+FROM Employee JOIN Department ON Employee.DepartmentId = Department.Id
+WHERE (Employee.DepartmentId, Salary) in
+(Select DepartmentId, MAX(Salary) FROM Employee Group by DepartmentId);
+
+The sql statement -- MYSQL
