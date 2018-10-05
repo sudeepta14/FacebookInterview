@@ -1,0 +1,52 @@
+class Solution {
+    public boolean checkSubarraySum(int[] nums, int k) {
+        for(int start =0; start<nums.length-1;start++){
+            for(int end = start+1; end<nums.length;end++){
+                int sum=0;
+                for(int i = start; i<= end; i++){
+                    sum+=nums[i];
+                }
+                    if(sum == k || k!=0 && sum %k ==0){
+                        return true;
+                    
+                }
+            }
+        }
+        return false;
+    }
+}
+This is not an optimized solution
+
+The optimized solution is using a Hashmap
+
+class Solution {
+    public boolean checkSubarraySum(int[] nums, int k) {
+        int sum=0;
+        HashMap<Integer, Integer> map = new HashMap<>();
+        map.put(0,-1);
+        for(int i=0; i<nums.length;i++){
+            sum+=nums[i];
+            if(k !=0)
+                sum = sum % k;
+            if(map.containsKey(sum)){
+                if(i - map.get(sum)> 1){
+                        return true;
+                    }
+                }
+            else{
+            map.put(sum,i);
+            }
+        }
+        return false;
+    }
+}
+
+suppose 23, 2, 4 and k = 6
+
+map values = 
+
+0 , -1 
+23 % 6 = 5, 1
+5+2 % 6 = 1, 2
+1+4 % 6 = 5 ---- here we can see we again get value as 5. Hence ----- if get the same value again --- we find the for i to j 
+sequence there must be sum that is equal to the target. Hence return true
