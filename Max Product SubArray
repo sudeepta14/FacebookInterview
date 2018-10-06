@@ -1,0 +1,17 @@
+class Solution {
+    public int maxProduct(int[] nums) {
+        int maxPrev = nums[0];
+        int minPrev = nums[0];
+        int result = nums[0];
+        for(int i=1; i<nums.length; i++){
+            
+           int maxCurr = Math.max(Math.max(maxPrev * nums[i], minPrev * nums[i]), nums[i]);
+            int  minCurr = Math.min(Math.min(maxPrev * nums[i], minPrev * nums[i]), nums[i]);
+            result = Math.max(result, maxCurr);
+            maxPrev = maxCurr;
+            minPrev = minCurr;
+            
+        }
+        return result;
+    }
+}
