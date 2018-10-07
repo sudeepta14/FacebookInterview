@@ -1,0 +1,34 @@
+class Solution {
+    public int nextGreaterElement(int n) {
+        char[] number = (n + "").toCharArray();
+        int i, j;
+        // Find out the smallest number from the right hand side
+        for(i = number.length-1 ; i>0 ; i--){
+            if(number[i-1] < number[i]){
+                break;
+            }
+        }
+        // if all the numbers in the original number are in descending order, it is an edge case
+        if(i==0){
+            return -1;
+        }
+        //next, we will be finding out the smallest element from i+1 to end of char array
+        
+        int x = number[i-1], smallest = i;
+        for(j=i+1; j<number.length; j++){
+            if(number[j] > x && number[j]<=number[smallest]){
+                smallest = j;
+            }
+        }
+        // swap the numbers
+        
+        char temp = number[i-1];
+        number[i-1] = number[smallest];
+        number[smallest] = temp;
+        //sort after the smallest element found in step 1
+        Arrays.sort(number, i, number.length);
+        
+        long val = Long.parseLong(new String(number));
+        return (val <= Integer.MAX_VALUE ? (int)val : -1);
+    }
+}
