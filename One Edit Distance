@@ -1,0 +1,46 @@
+class Solution {
+    public boolean isOneEditDistance(String s, String t) {
+        
+        // if either of the strings are empty and the other string has only one character we can add that character
+       if(s.length() == 0 || s == null){
+           return t.length() == 1;
+       }
+    
+        if(t.length() == 0 || t == null){
+            return s.length() == 1;
+        }
+        
+        int m = s.length();
+        int n = t.length();
+        if (Math.abs(m-n)>1){
+            return false; 
+        }
+        
+       int p1=0;
+        int p2=0;
+        int count =0;
+        while(p1 <m && p2<n){
+            if(s.charAt(p1) == t.charAt(p2)){
+                p1++;
+                p2++;
+            }else{
+                count++;
+                if(count > 1){
+                    return false;
+                }
+                if(m==n){
+                    p1++;
+                    p2++;
+                }else if(m>n){
+                    p1++;
+                }else{
+                    p2++;
+                }
+            }
+        }
+        count += m - p1 + n - p2;
+        return count == 1;
+        
+        
+    }
+}
