@@ -1,0 +1,44 @@
+public String convert(String s, int nRows) {
+    char[] c = s.toCharArray();
+    int len = c.length;
+    StringBuffer[] sb = new StringBuffer[nRows];
+    for (int i = 0; i < sb.length; i++) sb[i] = new StringBuffer();
+    
+    int i = 0;
+    while (i < len) {
+        for (int idx = 0; idx < nRows && i < len; idx++) // vertically down
+            sb[idx].append(c[i++]);
+        for (int idx = nRows-2; idx >= 1 && i < len; idx--) // obliquely up
+            sb[idx].append(c[i++]);
+    }
+    for (int idx = 1; idx < sb.length; idx++)
+        sb[0].append(sb[idx]);
+    return sb[0].toString();
+}
+
+class Solution {
+    public String convert(String s, int numRows) {
+        int length = s.length();
+        if(numRows > length || numRows <= 1){
+            return s;
+        }
+        char[] zigZagChars = new char[length];
+        int count = 0;
+        int interval = 2*numRows - 2;
+        for(int i=0; i<numRows; i++){
+            int step = interval - 2*i;
+            for(int j=i; j<length;j+=interval){
+                zigZagChars[count] = s.charAt(j);
+                count++;
+                
+                if(step >0 && step <interval &&  j+step < length){
+                    zigZagChars[count] = s.charAt(j+step);
+                    count++;
+                }
+            }
+            
+        }
+        return new String(zigZagChars);
+        
+    }
+}
