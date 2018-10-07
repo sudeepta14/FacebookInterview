@@ -1,0 +1,75 @@
+class Solution {
+    public List<String> findItinerary(String[][] tickets) {
+        for(String[] ticket: tickets){
+            map.computeIfAbsent(ticket[0], k-> new PriorityQueue()).add(ticket[1]);
+        }
+        visit("JFK");
+        return res;
+    }
+    Map<String, PriorityQueue<String>> map = new HashMap<>();
+    List<String> res = new LinkedList<>();
+    
+    void visit(String airport){
+        while(map.containsKey(airport) && !map.get(airport).isEmpty()){
+            visit(map.get(airport).poll());
+        }
+        res.add(0, airport);
+    }
+}
+
+8 ms solution 
+class Solution {
+    public List<String> findItinerary(String[][] tickets) {
+		
+		HashMap<String,ArrayList<String>> graph=new HashMap<>();
+		HashMap<String,Integer> number=new HashMap<>();
+		int count=0;
+		for(String[] strs: tickets)
+		{
+			if(!graph.containsKey(strs[0]))
+				graph.put(strs[0],new ArrayList<String>());
+			count++;
+			graph.get(strs[0]).add(strs[1]);
+		}
+		for(String str:graph.keySet())
+			Collections.sort(graph.get(str));
+		
+		List<String> list =new ArrayList<>();
+		List<String> ans=new ArrayList<>();
+		
+		dfs(0,graph,list,"JFK",count);
+		for(int i=list.size()-1;i>=0;i--)
+			ans.add(list.get(i));
+		return ans;
+    }
+	
+	boolean dfs(int c,HashMap<String,ArrayList<String>> graph,List<String> list,String node,int count)
+	{
+		boolean flag=false;
+        if(!graph.containsKey(node)||graph.get(node).size()==0)
+        {   if(c==count)
+        	{   
+        		list.add(node);
+        		return true;
+        	}	
+        	else
+        		return false;
+        }
+        for(int i=0;i<graph.get(node).size();i++)
+        {
+        	String dst=graph.get(node).get(i);
+        	graph.get(node).remove(i);
+        	flag=dfs(c+1,graph,list,dst,count);
+        	if(!flag)
+			{	
+        		graph.get(node).add(i,dst);
+				continue;
+			}
+			else
+			{	list.add(node);
+				i--;
+			}
+        }
+        return flag;
+	}
+}
