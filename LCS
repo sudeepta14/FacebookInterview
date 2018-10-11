@@ -1,0 +1,23 @@
+class Solution {
+    public int longestConsecutive(int[] nums) {
+       HashSet<Integer> hash = new HashSet<Integer>();
+        int temp =0;
+        int lengthofLSCN = 0;//Length of largest subset with consecutive numbers
+        for(int x: nums){
+            hash.add(x);
+        }
+        
+        for(Integer value: nums){
+            if(!hash.contains(value-1)){
+                temp = value;
+                while(hash.contains(temp))
+                    temp++;
+            
+            if(lengthofLSCN < (temp - value)){
+                lengthofLSCN = temp - value;
+            }
+        }
+        }
+        return lengthofLSCN;
+    }
+}
