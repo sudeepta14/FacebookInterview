@@ -64,3 +64,5 @@ class LRUCache {
       }
     }
 }
+
+Time Complexity : O(1)
