@@ -18,3 +18,9 @@ class Solution {
         return ans;
     }
 }
+Time Complexity: O(\mathcal{A}^2 + N)O(A 
+2
+ +N), where NN is the number of people, and \mathcal{A}A is the number of ages.
+
+Space Complexity: O(\mathcal{A})O(A), the space used to store count.
+
