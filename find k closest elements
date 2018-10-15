@@ -1,0 +1,45 @@
+class Solution {
+    public List<Integer> findClosestElements(int[] arr, int k, int x) {
+        int n = arr.length;
+        if (x <= arr[0]){
+            return sublist(arr, 0, k);
+        }else if (x >= arr[n-1]){
+            return sublist(arr, n-k,n);
+        }else {
+            int index = Arrays.binarySearch(arr, x);
+            if (index < 0)
+                index = -index - 1;
+                
+                int lo = Math.max(0, index - (k+1)); //These lines guarantee no out of bounds
+                int hi = Math.min(n-1, index + (k+1));
+                
+                int size = hi - lo + 1;
+                while (size > k){
+                    int leftDist = x - arr[lo];
+                    int rightDist = arr[hi] - x;
+                    
+                    if (leftDist <= rightDist){
+                        hi--; // The right side must not be part of the list
+                    }else {
+                        lo++; //Don't include left most element
+                    }
+                   //Update the size of the solution 
+                    size = hi - lo + 1;
+                }
+                
+                  return sublist(arr, lo, hi + 1);
+        }
+ }
+    
+    
+    
+    //Returns sub list from [start, end) 
+    List<Integer> sublist(int[] arr, int start, int end){ //Not including end
+        List<Integer> sub = new ArrayList<>();
+        for (int i = start; i < end; i++){
+            sub.add(arr[i]); 
+        }
+        
+        return sub;
+    }
+}
