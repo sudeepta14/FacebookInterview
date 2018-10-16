@@ -1,0 +1,29 @@
+public class Solution {
+    private int mergeSort(int[] nums, int[] aux, int l, int r) {
+        if (l >= r) return 0;
+        int m = (l + r) >> 1;
+        int res = mergeSort(nums, aux, l, m) + mergeSort(nums, aux, m + 1, r);
+        for (int i = l; i <= r; i++) aux[i] = nums[i];
+        int i = l;
+        int j = m + 1;
+        while (j <= r && i <= m) {
+            if ((aux[i] >> 1) + (aux[i] & 1) > aux[j]) {
+                res += m - i + 1;
+                j++;
+            } else i++;
+        }
+        i = l;
+        j = m + 1;
+        int p = l;
+        while (j <= r && i <= m) nums[p++] = aux[i] <= aux[j] ? aux[i++] : aux[j++];
+        while (j <= r) nums[p++] = aux[j++];
+        while (i <= m) nums[p++] = aux[i++];
+        return res;
+    }
+    public int reversePairs(int[] nums) {
+        int aux[] = new int[nums.length];
+        return mergeSort(nums, aux, 0, nums.length - 1);
+    }
+}
+
+Time Complexity : O(nlogn)
