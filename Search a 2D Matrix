@@ -1,0 +1,43 @@
+class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+        if(matrix.length==0 || matrix[0].length ==0){
+            return false;
+        }
+        int top = 0;
+        int down = matrix.length-1;
+        int col = matrix[0].length-1;
+        while(top<=down){
+            int mid = (top+down)/2;
+            if(matrix[mid][0] <=target && matrix[mid][col] >= target){
+                return binarySearch(matrix, mid, target);
+            }
+            if(matrix[mid][col]<target){
+                top= mid+1;
+            }
+            if(matrix[mid][0]>target){
+                down = mid-1;
+            }
+            
+        }
+        return false;
+        
+    }
+    
+    boolean binarySearch(int[][] matrix, int rowIndex, int target){
+        int start = 0;
+        int end = matrix[rowIndex].length - 1;
+        int mid = 0;
+        while(start <= end){
+            mid = (start+end)/2;
+            if(matrix[rowIndex][mid]== target)
+                return true;
+            else if(matrix[rowIndex][mid]>target)
+                end = mid-1;
+            else
+                start = mid+1;
+        }
+        return false;
+    }
+}
+
+Time Complexity : O(log m * log n)
