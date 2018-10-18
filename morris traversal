@@ -1,0 +1,69 @@
+class Solution {
+    public List<Integer> preorderTraversal(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        if(root==null)return list;
+        TreeNode curr = root;
+        
+        while(curr!=null){
+            if(curr.left==null){
+                list.add(curr.val);
+                curr=curr.right;
+            }
+            else
+            {
+                TreeNode pred = curr.left;
+                while(pred.right!=curr && pred.right!=null)
+                    pred=pred.right;
+                
+                if(pred.right==null){
+                    pred.right=curr;
+                    list.add(curr.val);
+                    curr=curr.left;
+                }
+                else
+                {
+                    pred.right=null;
+                    curr=curr.right;
+                }
+            }
+        }
+        return list;
+        
+    }
+}
+Inorder:
+class Solution {
+    public List<Integer> inorderTraversal(TreeNode root) {
+        
+        List<Integer> list = new ArrayList<>();
+        if(root==null)return list;
+        TreeNode curr = root;
+        
+        while(curr!=null){
+            if(curr.left==null){
+                list.add(curr.val);
+                curr=curr.right;
+            }
+            else
+            {
+                TreeNode pred = curr.left;
+                while(pred.right!=curr && pred.right!=null)
+                    pred=pred.right;
+                
+                if(pred.right==null){
+                    pred.right=curr;
+                    curr=curr.left;
+                }
+                else
+                {
+                    pred.right=null;
+                    list.add(curr.val);
+                    curr=curr.right;
+                }
+            }
+        }
+        return list;
+    }
+}
+
+Time Complexity : O(n) 
