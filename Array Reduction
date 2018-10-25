@@ -1,0 +1,23 @@
+import java.util.*;
+public class MyClass {
+    public static int countTriplets(int [] arr) {
+        PriorityQueue<Integer> pq = new PriorityQueue<Integer>();
+        int sum=0;
+        for(int x: arr){
+            pq.add(x);
+        }
+        while(pq.size() > 1){
+            int first = pq.poll();
+            int second = pq.poll();
+            sum += first+second;
+            pq.add(first+second);
+        }
+        return sum;
+    }
+    public static void main(String args[]) {
+        int [] arr = {1,2,3};
+        System.out.println(countTriplets(arr));
+    }
+}
+Time Complexity : O(n)
+Space Complexity : O(n)
