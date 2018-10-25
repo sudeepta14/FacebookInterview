@@ -1,0 +1,31 @@
+import java.util.*;
+
+public class MyClass {
+    public static int countTriplets(int [] arr, int target) {
+        Arrays.sort(arr);
+        int n = arr.length;
+        int ans = 0;
+        for(int i=0; i<n-2; i++){
+            // Initialize other two elements as corner elements
+            int j = i+1, k = n-1;
+            while(j<k){
+                if(arr[i] +arr[j]+arr[k] >= target){
+                    k--;
+                }else{
+                    ans+=k-j;
+                    j++;
+                }
+            }
+        }
+        return ans;
+     
+    }
+    public static void main(String args[]) {
+        int [] arr = {5, 1, 3, 4, 7};
+        int target = 12;
+        System.out.println(countTriplets(arr, target));
+    }
+}
+
+Time Complexity : O(n)
+Space Complexity : O(1)
