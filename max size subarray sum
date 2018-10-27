@@ -1,0 +1,20 @@
+public class MyClass {
+    public static void main(String args[]) {
+        int[] arr = {1,2,3};
+        int s = 3;
+        System.out.println(minSubArrayLen(s,arr));
+    }
+    public static int minSubArrayLen(int s, int[] a) {
+    if (a == null || a.length == 0)
+        return 0;
+    int i = 0, j = 0, sum = 0, max = -1;
+    while (j < a.length) {
+        sum += a[j++];
+        while (sum >= s) {
+            max = Math.max(max, j - i);
+            sum -= a[i++];
+        }
+    }
+    return max == Integer.MIN_VALUE ? 0 : max;
+    }
+}
