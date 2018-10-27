@@ -1,0 +1,59 @@
+import java.util.*;
+public class MyClass {
+    public static void main(String args[]) {
+        String dateString = "20th Oct 2052";
+        System.out.println(dateStringify(dateString));
+    }
+    public static String dateStringify(String dateString){
+        Map<String, String> dayMap = new HashMap<>();
+        Map<String, String> monthMap = new HashMap<>();
+        dayMap.put("30th","30");
+        dayMap.put("29th","29");
+        dayMap.put("28th","28");
+        dayMap.put("27th","27");
+        dayMap.put("26th","26");
+        dayMap.put("25th","25");
+        dayMap.put("24th","24");
+        dayMap.put("23th","23");
+        dayMap.put("22th","22");
+        dayMap.put("21th","21");
+        dayMap.put("20th","20");
+        dayMap.put("19th","19");
+        dayMap.put("18th","18");
+        dayMap.put("17th","17");
+        dayMap.put("16th","16");
+        dayMap.put("15th","15");
+        dayMap.put("14th","14");
+        dayMap.put("13th","13");
+        dayMap.put("12th","12");
+        dayMap.put("11th","11");
+        dayMap.put("10th","10");
+        dayMap.put("9th","9");
+        dayMap.put("8th","8");
+        dayMap.put("7th","7");
+        dayMap.put("6th","6");
+        dayMap.put("5th","5");
+        dayMap.put("4th","4");
+        dayMap.put("3rd","3");
+        dayMap.put("2nd","2");
+        dayMap.put("1st","1");
+        
+        monthMap.put("Jan","01");
+        monthMap.put("Feb","02");
+        monthMap.put("Mar","03");
+        monthMap.put("Apr","04");
+        monthMap.put("May","05");
+        monthMap.put("Jun","06");
+        monthMap.put("Jul","07");
+        monthMap.put("Aug","08");
+        monthMap.put("Sep","09");
+        monthMap.put("Oct","10");
+        monthMap.put("Nov","11");
+        monthMap.put("Dec","12");
+        
+        String [] result = dateString.split(" ");
+        String resultString = result[2] + '-' + monthMap.get(result[1]) + '-' + dayMap.get(result[0]);
+        return resultString;
+    }
+    
+}
