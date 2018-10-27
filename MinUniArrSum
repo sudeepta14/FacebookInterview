@@ -1,0 +1,22 @@
+import java.util.*;
+public class Min_Unique_Array{
+    public static void main(String[] args){
+        int[] arr = {3,2,1,2,7};
+        int res = minUniqueArray(arr);
+        System.out.println(res);
+    }
+    public static int minUniqueArray(int[] arr){
+        Arrays.sort(arr);
+        int pre = arr[0];
+        int sum = pre;
+        for(int i = 1; i<arr.length; i++){
+            int cur = arr[i];
+            if(pre >= cur){
+                cur = pre+1;
+            }
+            pre = cur;
+            sum+=pre;
+        }
+        return sum;
+    }
+}
