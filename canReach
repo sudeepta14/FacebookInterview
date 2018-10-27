@@ -1,0 +1,16 @@
+public class MyClass {
+    public static void main(String args[]) {
+        int[][] coordinate = {{1,4}, {5,14}};
+        System.out.println(canReach(coordinate));
+    }
+    public static boolean canReach(int[] [] coordinate){
+        int[] start = coordinate[0];
+        int[] end = coordinate[1];
+        return dfs(start[0], start[1], end[0], end[1]);
+    }
+    private static boolean dfs(int a, int b, int c, int d){
+        if (a==c && b==d) return true;
+        else if(c<a || d<b) return false;
+        return dfs(a, b, c-d,d) || dfs(a, b, c,d-c);
+    }
+}
