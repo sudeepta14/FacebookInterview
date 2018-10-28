@@ -1,0 +1,10 @@
+for num in xrange(1,101):
+    #Cycle through numbers within 1-100
+    if(num%6 == 0 and num %4 == 0):
+        print "LinkedIn"
+    elif(num%6 == 0):
+        print "In"
+    elif(num%4 == 0):
+        print "Linked"
+    else:
+        print num
