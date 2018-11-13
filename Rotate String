@@ -1,0 +1,44 @@
+class Solution {
+    public boolean rotateString(String A, String B) {
+        // String sumA = A+A;
+        // if(sumA.contains(B) && A.length() == B.length()){
+        //     return true;
+        // }else{
+        //     return false;
+        // }
+        
+        
+        // Recursion method
+        if(A.length() != B.length()){
+            return false;
+        }
+        if(A == null || B == null){
+            return false;
+        }
+        String tempA = A;
+        return compareStr(tempA, A, B);
+    }
+    
+    private boolean compareStr(String temp, String A, String B){
+        boolean isRotated = false;
+        char[] arr = new char[temp.length()];
+        for(int i=0; i<temp.length(); i++){
+            if(i==0){
+                arr[temp.length()-1] = temp.charAt(i);
+            }else{
+                arr[i-1]=temp.charAt(i);
+            }
+        }
+        String comp = String.valueOf(arr);
+        if(comp.equals(B)){
+            return true;
+        }
+        else if(comp.equals(A)){
+            return false;
+        }
+        else{
+            isRotated = compareStr(comp, A, B);
+        }
+        return isRotated;
+    }
+}
