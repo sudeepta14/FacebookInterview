@@ -1,0 +1,29 @@
+class Solution {
+    public List<List<String>> groupStrings(String[] strings) {
+      if(strings.length == 0){
+          return Collections.emptyList();
+      }
+        Map<String, List<String>> groups = new HashMap<>();
+        for(String str: strings){
+            String key = calculate(str);
+            groups.putIfAbsent(key, new ArrayList<>());
+            groups.get(key).add(str);
+        }
+        return new ArrayList<>(groups.values());
+    }
+    
+    public String calculate(String str){
+        StringBuilder sb = new StringBuilder();
+        for(int i=1; i<str.length(); i++){
+            int diff = str.charAt(i) - str.charAt(i-1);
+            if(diff < 0){
+                diff+=26;
+            }
+            sb.append(diff);
+        }
+        return sb.toString();
+    }
+    
+    
+   
+}
