@@ -1,0 +1,49 @@
+class Solution {
+    public TreeNode deleteNode(TreeNode root, int key) {
+        TreeNode target = root, parent = null;
+        while(target!= null && target.val != key){
+            parent=target;
+            if(key>target.val) target = target.right;
+            else target = target.left;
+        }
+        if(target==null) return root;
+        // Case 1: There are no children
+        
+        if(target.left == null && target.right == null){
+            if(parent==null)return null;
+            if(target==parent.left) parent.left = null;
+            else parent.right = null;
+            return root;
+        }
+        
+        // Case 2: Only one child
+        // Case 2.1 : No right child
+        
+        if(target.right == null){
+            if(parent==null)return target.left;
+            if(target==parent.left) parent.left = target.left;
+            else parent.right = target.left;
+            return root;
+        }
+        
+        // Case 2.2 : No left child
+        if(target.left == null){
+            if(parent == null)return target.right;
+            if(target == parent.left) parent.left = target.right;
+            else parent.right = target.right;
+            return root;
+        }
+        
+        // Case 3: Both child nodes are present
+        
+        TreeNode prev = target, p = target.right;
+        while(p.left != null){
+            prev = p;
+            p = p.left;
+        }
+        target.val = p.val;
+        if(p == prev.left) prev.left = p.right;
+         else prev.right = p.right;
+        return root;
+    }
+}
