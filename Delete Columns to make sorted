@@ -1,0 +1,17 @@
+class Solution {
+    public int minDeletionSize(String[] A) {
+        int ans = 0;
+        for(int c = 0; c < A[0].length(); c++){
+            for(int x = 0 ; x <A.length -1; x++){
+                if(A[x].charAt(c) > A[x+1].charAt(c)){
+                    ans++;
+                    break;
+                }
+            }
+        }
+        return ans;
+    }
+}
+
+Time Complexity : O(N) --- TOTAL CONTENTS OF A
+Space Complexity : O(1)
