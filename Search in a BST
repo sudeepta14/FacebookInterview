@@ -1,0 +1,14 @@
+class Solution {
+    public TreeNode searchBST(TreeNode root, int val) {
+        if(root == null || root.val == val )
+        {
+            return root;
+        }else if(val > root.val){
+            return searchBST(root.right, val);
+        }else{
+            return searchBST(root.left, val);
+        }
+    }
+}
+Time Complexity : O(N) --- number of nodes which needs to be moved in the binary search tree
+Space Complexity : O(N) --- recursion depth
