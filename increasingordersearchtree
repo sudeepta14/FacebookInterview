@@ -1,0 +1,21 @@
+class Solution {
+    public TreeNode increasingBST(TreeNode root) {
+        List<Integer> vals = new ArrayList();
+        inorder(root, vals);
+        TreeNode ans = new TreeNode(0), cur = ans;
+        for(int x: vals){
+            cur.right = new TreeNode(x);
+            cur = cur.right;
+        }
+        return ans.right;
+    }
+    public void inorder(TreeNode root, List<Integer> vals){
+        if(root == null) return;
+        inorder(root.left, vals);
+        vals.add(root.val);
+        inorder(root.right, vals);
+    }
+}
+
+Time Complexity: O(n) -- number of nodes in the tree
+Space Complexity : O(n) -- recursion depth of the tree. 
