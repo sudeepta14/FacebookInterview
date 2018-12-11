@@ -1,0 +1,25 @@
+class Solution {
+    public boolean isAlienSorted(String[] words, String order) {
+        Map<Character, Integer> map = new HashMap();
+        for(int i= 0 ; i<order.length(); i++){
+            map.put(order.charAt(i), i); // storing the order in a hashmap
+        }
+        
+        for(int i = 0; i<words.length -1 ; i++){
+            if(words[i].length() > words[i+1].length() && words[i].contains(words[i+1])){ // apple coming in front of app
+                return false;
+            }
+            int len = Math.min(words[i].length(), words[i+1].length());
+            for(int j = 0; j<len; j++){
+                if(words[i].charAt(j) == words[i+1].charAt(j)){
+                    continue;
+                }
+                if(map.get(words[i].charAt(j)) < map.get(words[i+1].charAt(j))){
+                    break;
+                }
+                return false;
+            }
+        }
+        return true;
+    }
+}
