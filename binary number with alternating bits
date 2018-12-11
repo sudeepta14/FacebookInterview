@@ -1,0 +1,16 @@
+class Solution {
+    public boolean hasAlternatingBits(int n) {
+      int cur = n%2;
+        n = n/2;
+        while(n > 0){
+            if(cur == n%2) return false;
+            cur = n%2;
+            n = n/2;
+        }
+        return true;
+    }
+}
+
+//Checking the last bit and verifiying the last bit is similar to last fetched bit.
+
+// you can also use built in java methods which can String bits = Integer.toBinaryString(n);
