@@ -1,0 +1,23 @@
+class Solution {
+    public int rotatedDigits(int N) {
+       int k =0, i;
+        for(int j=1; j<=N; j++){
+            i=j;
+             boolean ok = false;
+            while(i>0){
+               
+                int curDigit = i%10;
+                if(curDigit == 2 || curDigit == 5 || curDigit == 6 || curDigit == 9) ok = true;
+                else if(curDigit == 3 || curDigit == 4 || curDigit == 7){
+                    ok = false;
+                    break;
+                }
+                i = i/10;
+            }
+            if (ok) k++;
+        }
+        return k;
+    }
+}
+
+// Very good solution
