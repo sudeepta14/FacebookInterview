@@ -1,0 +1,34 @@
+class Solution {
+    public int dominantIndex(int[] nums) {
+        // Step 1: Find the maximum element
+        // Step 2: Check whether the number is atleast twice of the other numbers
+        boolean flag = false;
+        if(nums.length == 1){
+            return 0;
+        }
+        int max = Integer.MIN_VALUE;
+        int index = -1;
+        // Function to get the max element from the array
+        for(int i =0 ; i<nums.length;i++){
+            if(nums[i] > max){
+                max = nums[i];
+                index = i;
+            }
+        }
+        for(int i=0; i<nums.length;i++){
+            if(max == nums[i]){
+                continue;
+            }
+            if(max >= 2*nums[i]){
+                 flag = true;
+            }else{
+                flag = false;
+                break;
+            }
+        }
+        if(flag){
+            return index;
+        }
+         return -1;
+    }
+}
