@@ -1,0 +1,19 @@
+class Solution {
+    int sum = 0;
+    public TreeNode convertBST(TreeNode root) {
+       reverseInOrder(root);
+        return root;
+    }
+    public void reverseInOrder(TreeNode root){
+        if(root == null){
+            return;
+        }
+        reverseInOrder(root.right);
+        root.val+=sum;
+        sum = root.val;
+        reverseInOrder(root.left);
+    }
+    
+}
+
+// ReverseInorder --- Right Root Left.
