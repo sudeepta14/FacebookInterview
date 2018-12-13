@@ -1,0 +1,46 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+  static int[][] findPairsWithGivenDifference(int[] arr, int k) {
+    // your code goes here
+    // for every value x which is present in the array, we have to check if there is another value
+    // y which is x = y+k ( both the values will be similar with the delta part of it added to y)
+    Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+    int[][] resultArr = new int[arr.length][2];
+    List<List<Integer>> result = new ArrayList<>();
+    for(Integer i : arr){
+      // In this map we have stored y value as key for value x
+     map.put(i-k,i);
+    }
+    for(int y : arr){
+        List<Integer> list = new ArrayList<>();
+      if(map.containsKey(y)){
+        list.add(y);
+        list.add(map.get(y));
+        result.add(list);
+      }
+    }
+    for(int i=0; i<result.size();i++){
+       for(int j=0; j<2; j++){
+           resultArr[i][j] = result.get(i).get(j);
+       }
+    }
+    return resultArr;
+  }
+
+  public static void main(String[] args) {
+      int[] newArr = {0,-1,-2,2,1};
+      int k = 1;
+      List<List<Integer>> l = new ArrayList<>();
+      int[][] res = findPairsWithGivenDifference(newArr, k);
+      for(int i = 0 ; i<res.length-1; i++){
+          for(int j = 0; j<res[0].length; j++){
+              System.out.print(res[i][j]);
+          }
+          System.out.println();
+      }
+  }
+
+}
