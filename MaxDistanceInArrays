@@ -1,0 +1,26 @@
+class Solution {
+    public int maxDistance(List<List<Integer>> list) {
+        int res = Integer.MIN_VALUE;
+        int min_val = list.get(0).get(0);
+        int max_val = list.get(0).get(list.get(0).size()-1);
+        for(int i=1; i<list.size(); i++){
+        res = Math.max(res, Math.max(Math.abs(list.get(i).get(list.get(i).size()-1) - min_val), Math.abs(max_val- list.get(i).get(0))));
+            min_val = Math.min(min_val, list.get(i).get(0));
+            max_val = Math.max(max_val, list.get(i).get(list.get(i).size()-1));
+        }
+        return res;
+    }
+}
+
+Time Complexity : O(n)
+Space Complexity : O(1)
+
+First we have to find the first element in the first array and keep that as the min element
+Second we have to find the last element in the first array and keep that as the max element
+
+So, for every iteration, we do a linear scan of the elements such that:
+
+if we find the max element in any other array -- change the max element to that element
+if we find a min element in any other array -- change the min element to that element
+
+and accordingly find the the max distance and return the result to the user. 
