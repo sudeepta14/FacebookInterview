@@ -1,0 +1,24 @@
+class Solution {
+    public boolean checkRecord(String s) {
+        // Things to check are if he has more than one A -- false;
+        // if he has more than two L continously.
+        int count = 0;
+        // Checking if he is absent for more than one day.
+        for(int i = 0; i<s.length(); i++){
+            if(s.charAt(i) == 'A'){
+                count++;
+            }
+        }
+        if(count>1){
+            return false;
+        }
+        for(int i=0; i<s.length()-2; i++){
+            if(s.charAt(i) == 'L' && s.charAt(i+1) == 'L' && s.charAt(i+2) == 'L'){
+                return false;
+            }
+        }
+        return true;
+    }
+}
+Time Complexity : O(n)
+Space Complexity : O(1)
