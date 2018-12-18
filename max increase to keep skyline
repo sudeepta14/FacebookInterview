@@ -1,0 +1,22 @@
+class Solution {
+    public int maxIncreaseKeepingSkyline(int[][] grid) {
+        int[] maxRow = new int[grid.length];
+        int[] maxCol = new int[grid[0].length];
+        int ans = 0;
+      for(int r=0; r<grid.length; r++){
+          for(int c=0; c<grid[0].length; c++){
+              maxRow[r]= Math.max(maxRow[r], grid[r][c]);
+              maxCol[c] = Math.max(maxCol[c], grid[r][c]);
+          }
+      }
+        for(int r = 0; r<grid.length; r++){
+            for(int c=0; c<grid[0].length; c++){
+                ans+= Math.min(maxRow[r], maxCol[c]) - grid[r][c];
+            }
+        }
+        return ans;
+    }
+}
+
+Time Complexity : O(n2)
+Space Complexity : O(n) -- space required by both the arrays. 
