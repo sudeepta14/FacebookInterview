@@ -1,0 +1,35 @@
+class Solution {
+    public int[] findPermutation(String s) {
+        int len = s.length();
+        int [] resultArr = new int[len+1];
+        int j = 0;
+        
+        // Keeping all the elements in a sorted array
+        for(int i=1; i<=len+1; i++){
+            resultArr[j++] = i;
+        }
+        
+        // Then we have to find out the number of consective D's in the array and descend accordingly
+        
+        for(int h = 0; h<len; h++){
+            if(s.charAt(h) == 'D'){
+                int l = h;
+                while(h<len && s.charAt(h) == 'D'){
+                    h++;
+                }
+                reverse(resultArr, l, h);
+            }
+        }
+        return resultArr;
+    }
+    
+    public void  reverse(int[] arr, int l, int h){
+        while(l<h){
+            int temp = arr[l];
+            arr[l] = arr[h];
+            arr[h] = temp;
+            l++;
+            h--;
+        }
+    }
+}
