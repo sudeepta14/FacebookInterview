@@ -1,0 +1,59 @@
+class Solution {
+    public boolean canVisitAllRooms(List<List<Integer>> rooms) {
+       boolean[] seen = new boolean[rooms.size()];
+        Stack<Integer> stack = new Stack<Integer>();
+        seen[0]=true;
+        stack.push(0);
+        while(!stack.isEmpty()){
+            int key = stack.pop();
+            for(int nei : rooms.get(key)){
+                if(!seen[nei]){
+                    seen[nei] = true;
+                    stack.push(nei);
+                }
+            }
+        }
+        for(boolean v: seen){
+            if(!v){
+                return false;
+            }
+        }
+        return true;
+        
+    }
+}
+
+Recursive way:
+class Solution {
+    public boolean canVisitAllRooms(List<List<Integer>> rooms) {
+      if(rooms == null || rooms.size() == 0){
+          return false;
+      }
+        int visited[] = new int[rooms.size()];
+        canVisitAllRoomsRecursive(rooms, visited, 0);
+        
+        for(int i=0; i<visited.length; i++){
+            if(visited[i] == 0){
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    public void canVisitAllRoomsRecursive(List<List<Integer>> rooms, int visited[],int roomno ){
+        if(visited[roomno] == 1){
+           return;
+        }
+        visited[roomno] = 1;
+        int size = rooms.get(roomno).size();
+        for(int i=0; i<size; i++){
+            int localRoomNumber = rooms.get(roomno).get(i);
+            if(visited[localRoomNumber] != 1){
+                canVisitAllRoomsRecursive(rooms, visited, localRoomNumber);
+            }
+        }
+    
+    }
+}
+
+Time Complexity : O(n+e) Space Complexity : O(n) -- recursive stack height space. 
