@@ -1,0 +1,33 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public ListNode[] splitListToParts(ListNode root, int k) {
+      ListNode[] res = new ListNode[k];
+        int n = 0;
+        for(ListNode cur = root; cur!=null; cur=cur.next){
+            n++;
+        }
+        
+        ListNode head = root, prev = null;
+        int perpart = n/k;
+        int remain = n%k;
+        
+        for(int i =0; i<k; i++, remain --){
+            res[i]=head;
+            for(int j = 0; j<perpart + (remain > 0? 1:0); j++){
+                prev = head;
+                head = head.next;
+            }
+            if(prev != null){
+                prev.next = null;
+            }
+        }
+        return res;
+    }
+}
