@@ -1,0 +1,21 @@
+class Solution {
+    public int numComponents(ListNode head, int[] G) {
+       Set<Integer> set = new HashSet<>();
+        for(int ele: G){
+            set.add(ele);
+        }
+        
+        int ans = 0;
+        ListNode cur = head;
+        while(cur!=null){
+        if(set.contains(cur.val) &&(cur.next == null || !set.contains(cur.next.val))){
+            ans++;
+        }
+            cur= cur.next;
+        }
+        return ans;
+    }
+}
+
+Time Complexity: O(N+G) // where n is the number of nodes in the linked list and G is the size of the set which we are using to enter the linkedlist elements. 
+Space Complexity : O(G.length)
