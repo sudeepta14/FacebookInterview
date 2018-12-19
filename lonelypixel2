@@ -1,0 +1,34 @@
+class Solution {
+    public int findBlackPixel(char[][] picture, int N) {
+        Map<String, Integer> map = new HashMap<>();
+        int n = picture.length;
+        int m = picture[0].length;
+        int [] colCount = new int[m];
+        for(int i =0 ;i<n; i++){
+            int colRow =0;
+            for(int j = 0; j<m; j++){
+                if(picture[i][j] == 'B'){
+                    colCount[j]++;
+                    colRow++;
+                }
+            }
+            if(colRow==N){
+                String s = new String(picture[i]);
+                map.put(s, map.getOrDefault(s,0)+1);
+            }
+        }
+        
+        int count = 0;
+        for(String s: map.keySet()){
+            if(map.get(s) != N) continue;
+            for(int i = 0; i<s.length(); i++){
+                if(s.charAt(i) == 'B' && colCount[i] == N){
+                    count += N;
+                }
+            }
+        }
+        return count;
+    }
+}
+
+O(m*n)
