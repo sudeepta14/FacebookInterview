@@ -1,0 +1,59 @@
+Using DFS technique
+
+class Solution {
+    public int rob(TreeNode root) {
+        // try doing it for dfs way
+        
+        if(root == null){
+            return 0;
+        }
+        if(root.left == null && root.right == null){
+            return root.val;
+        }
+        int maxLeft = 0, maxRight = 0;
+        
+        if(root.left!= null){
+            maxLeft = rob(root.left.left) + rob(root.left.right);
+        }
+        if(root.right != null){
+            maxRight = rob(root.right.left) + rob(root.right.right);
+        }
+        
+        int maxRoot = root.val + maxLeft + maxRight;
+        
+        //Case 2: if we donot select root element
+        
+        int maxL = rob(root.left);
+        int maxR = rob(root.right);
+        
+        int maxNoRoot = maxL + maxR;
+        
+        return Math.max(maxRoot, maxNoRoot);
+    }
+}
+
+Using Dynamic Programming- 
+
+Another one is to keep track of repeated calculations of the subproblems --- best way to stop the program to reiterate calculations already calculated
+
+class Solution {
+    public int rob(TreeNode root) {
+        // Using Dynamic Programming
+       int[] res = robSub(root);
+        return Math.max(res[0], res[1]);
+    }
+
+    public int[] robSub(TreeNode root){
+        if(root == null){
+            return new int[2];
+        }
+        int[] left = robSub(root.left);
+        int[] right = robSub(root.right);
+        
+        int[] res = new int[2];
+        res[0] = Math.max(left[0], left[1]) + Math.max(right[0], right[1]);
+        res[1] = root.val + left[0] + right[0];
+        return res;
+    }
+    
+}
