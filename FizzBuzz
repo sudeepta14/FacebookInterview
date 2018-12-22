@@ -21,3 +21,28 @@ class Solution {
         
     }
 }
+
+Faster solution:
+
+class Solution {
+    public List<String> fizzBuzz(int n) {
+        List<String> list = new ArrayList<>();
+        int cnt3 = 3, cnt5 =5;
+        for(int i=1; i<=n; i++){
+            if(i==cnt3 && i==cnt5){
+                list.add("FizzBuzz");
+                cnt3+=3;
+                cnt5+=5;
+            }else if(i==cnt3){
+                list.add("Fizz");
+                cnt3+=3;
+            }else if(i==cnt5){
+                list.add("Buzz");
+                cnt5+=5;
+            }else {
+                list.add(Integer.toString(i));
+            }
+        }
+        return list;
+    }
+}
