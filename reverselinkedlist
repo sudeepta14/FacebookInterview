@@ -11,3 +11,18 @@ class Solution {
         return prev;
     }
 }
+
+class Solution{
+    public ListNode reverseList(ListNode head){
+    while(head == null || head.next == null){
+    return head;
+    }
+    ListNode temp = reverseList(head.next);
+    head.next.next = head;
+    head.next = null;
+    return temp;
+    }
+    }
+    
+    Recursion : Time Complexity : O(n)
+    Space Complexity : O(n)
