@@ -1,0 +1,43 @@
+public class Solution {
+    public int maxSubArray(int[] nums) {
+        return findMax(nums, 0, nums.length - 1);
+    }
+
+    public int findMax(int[] nums, int start, int end) {
+        if (start > end) {
+            return Integer.MIN_VALUE;
+        }
+    
+        if (start == end) {
+            return nums[start];
+        }
+    
+        int mid = start + (end - start) / 2;
+    
+        // max subarray in left subarray
+        int leftMax = findMax(nums, start, mid - 1);
+    
+        // max subarray in right subarray
+        int rightMax = findMax(nums, mid + 1, end);
+    
+    
+        // max subarray which includes nums[mid]
+    
+        // go left (nums[mid] is included in max subarray)
+        int sum = nums[mid];
+        int midMax = nums[mid];
+        for (int i = mid - 1; i >= start; i--) {
+            sum += nums[i];
+            midMax = Math.max(midMax, sum);
+        }
+    
+        // go right
+        sum = midMax;
+        for (int i = mid + 1; i <= end; i++) {
+            sum += nums[i];
+            midMax = Math.max(midMax, sum);
+        }
+
+        return Math.max(midMax, Math.max(leftMax, rightMax));
+    }
+}
