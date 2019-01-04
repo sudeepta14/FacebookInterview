@@ -1,0 +1,44 @@
+public class Solution {
+   
+    public RandomListNode copyRandomList(RandomListNode head) {
+     if(head== null){
+         return null;
+     }
+        copyList(head);
+        copyPointers(head);
+        return extractList(head);
+    }
+    private void copyList(RandomListNode head){
+        RandomListNode hd = head;
+        while(hd!=null){
+            RandomListNode copy = new RandomListNode(hd.label);
+            copy.next = hd.next;
+            hd.next = copy;
+            hd=copy.next;
+        }
+    }
+    private void copyPointers(RandomListNode head){
+        RandomListNode hd = head;
+        RandomListNode copy = head.next;
+        while(hd!=null){
+            copy = hd.next;
+            if(hd.random!=null){
+                copy.random=hd.random.next;
+            }
+            hd = copy.next;
+        }
+    }
+    public RandomListNode extractList(RandomListNode head){
+       RandomListNode copyHead = new RandomListNode(0);
+        RandomListNode originalPointer = head;
+        RandomListNode copyPointer = copyHead;
+        while(originalPointer !=null){
+            copyPointer.next = originalPointer.next;
+            copyPointer = copyPointer.next;
+            originalPointer.next = copyPointer.next;
+            originalPointer = originalPointer.next;
+        }
+        return copyHead.next;
+    }
+    
+}
