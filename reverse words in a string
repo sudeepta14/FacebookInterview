@@ -1,0 +1,43 @@
+public class Solution {
+    public String reverseWords(String s) {
+        if (s==null || s.length() == 0) {
+            return s;
+        }
+        char[] array = s.toCharArray();
+        
+        reverse(array, 0, array.length-1);
+        int start = 0;
+        for (int i = 0 ; i < array.length; i++) {
+            if (array[i]!=' ' && (i==0 || array[i-1] == ' ')) {
+                start = i;
+            }
+            if (array[i]!=' ' && (i==array.length-1 || array[i+1] == ' ')) {
+                reverse(array, start, i);
+            }
+        }
+        return cleanSpaces(array, array.length );
+    }
+    
+    private String cleanSpaces(char[] a, int n) {
+    int i = 0, j = 0;
+      
+    while (j < n) {
+      while (j < n && a[j] == ' ') j++;             // skip spaces
+      while (j < n && a[j] != ' ') a[i++] = a[j++]; // keep non spaces
+      while (j < n && a[j] == ' ') j++;             // skip spaces
+      if (j < n) a[i++] = ' ';                      // keep only one space
+    }
+  
+    return new String(a).substring(0, i);
+  }
+    
+    private void reverse(char[] array, int left, int right) {
+        while (left < right) {
+            char tmp = array[left];
+            array[left] = array[right];
+            array[right] = tmp;
+            left++;
+            right--;
+        }
+    }
+}
