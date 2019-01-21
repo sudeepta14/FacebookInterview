@@ -1,0 +1,14 @@
+class Solution {
+    public int subarraysDivByK(int[] A, int K) {
+        int[] sumMap = new int[K];
+        int count = 0, sum = 0;
+        sumMap[0]=1;
+        for(int num: A){
+            sum = (sum+num)%K;
+            if(sum<0) sum+=K;
+            count+= sumMap[sum];
+            sumMap[sum]++;
+            }
+        return count;
+    }
+}
