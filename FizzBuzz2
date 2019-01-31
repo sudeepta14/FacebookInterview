@@ -1,0 +1,22 @@
+class Solution {
+    public List<String> fizzBuzz(int n) {
+       List<String> list = new ArrayList<>();
+        int cnt3 =3, cnt5 = 5;
+        for(int i=1;i<=n;i++){
+            if(i%cnt3==0 && i%cnt5==0){
+                cnt3+=3;
+                cnt5+=5;
+                list.add("FizzBuzz");
+            }else if(i%cnt3 == 0){
+                cnt3+=3;
+                list.add("Fizz");
+            }else if(i%cnt5 == 0){
+                cnt5+=5;
+                list.add("Buzz");
+            }else{
+                list.add(String.valueOf(i));
+            }
+        }
+        return list;
+    }
+}
