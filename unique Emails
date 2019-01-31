@@ -1,0 +1,24 @@
+class Solution {
+    public int numUniqueEmails(String[] emails) {
+      Set<String> set = new HashSet<>();
+        for(String email: emails){
+            int atIndex = email.indexOf("@");
+            String front = email.substring(0, atIndex);
+            String back = email.substring(atIndex);
+            if(front.contains("+")){
+                front = front.substring(0, front.indexOf("+"));
+            }
+            StringBuilder sb = new StringBuilder(front);
+            while(sb.indexOf(".") != -1){
+                int index = sb.indexOf(".");
+                sb.deleteCharAt(index);
+            }
+            String ret = sb.toString()+"@"+back;
+            set.add(ret);
+        }
+        return set.size();
+    }
+}
+
+Time Complexity : O(n)
+Space Complexity : O(n)
