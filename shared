@@ -1,0 +1,31 @@
+import java.util.*;
+public class MyClass {
+    public static void main(String args[]) {
+       int[][] arr= {{1,2,1}, {1,2,2}, {2,3,1}, {2,3,3}, {2,4,3}};
+       int max = 0, count=0, maxCount = 0, product = 0;
+       Set<List<Integer>> set = new HashSet<>();
+       //HashMap<Set<List<Integer>>, Integer> = new HashMap<>();
+       for(int i=0;i<arr.length;i++){
+           List<Integer> list = new ArrayList<>();
+           count=0;
+           int x = arr[i][0];
+           int y = arr[i][1];
+           list.add(x);
+           list.add(y);
+           if(!set.contains(list)){
+                set.add(list);
+            }else{
+                count++;
+                if(count >= maxCount){
+                    maxCount = count;
+                max = Math.max(max, x*y);
+                }
+            }
+       }
+    //   for(List<Integer> list: set){
+    //       System.out.println(list);
+    //   }
+    System.out.println(max);
+       
+    }
+}
